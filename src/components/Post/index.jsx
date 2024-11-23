@@ -1,4 +1,5 @@
 import styles from './Post.module.css'
+import { Comment } from "../Comment/index";
 
 export function Post({ content, author }) {
     return (
@@ -41,6 +42,15 @@ export function Post({ content, author }) {
                     <button type="submit">Publicar</button>
                 </footer>
             </form>
+
+
+            <div className={styles.commentList}>
+                <Comment />
+                <Comment />
+                <Comment />
+                <Comment />
+                <Comment />
+            </div>
         </article>
     )
 }
