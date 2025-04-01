@@ -25,6 +25,9 @@ export function Post({ post }) {
     const deleteComment = (comment) => {
         setComments(prev => prev.filter(item => item !== comment))
     }
+    const handleNewCommentInvalid = (event) => {
+        event.target.setCustomValidity('Esse campo é obrigatório!')
+    }
 
     return (
         <article className={styles.post}>
@@ -57,7 +60,13 @@ export function Post({ post }) {
 
                 <textarea
                     value={txtComment}
-                    onChange={(evt) => setTxtComment(evt.target.value)}
+                    onInvalid={handleNewCommentInvalid}
+                    required
+                    onChange={(evt) => {
+                        evt.target.setCustomValidity('')
+                        setTxtComment(evt.target.value)
+                    }
+                    }
                     placeholder='Deixe um comentário'></textarea>
 
                 <footer>
