@@ -3,8 +3,6 @@ import { Comment } from "../Comment/index";
 import { Avatar } from '../Avatar';
 import { useState } from 'react';
 
-const comments = [1, 2, 3]
-
 export function Post({ post }) {
     const { author, content, publishedAt } = post
     const [txtComment, setTxtComment] = useState('')
@@ -20,10 +18,12 @@ export function Post({ post }) {
     const handleCreateNewComment = (evt) => {
         evt.preventDefault();
 
-        console.log(txtComment);
-
         setComments(prev => [...prev, txtComment])
         setTxtComment('')
+    }
+
+    const deleteComment = (comment) => {
+        setComments(prev => prev.filter(item => item !== comment))
     }
 
     return (
@@ -67,8 +67,11 @@ export function Post({ post }) {
 
 
             <div className={styles.commentList}>
-                {comments.map(comment => {
-                    return <Comment content={comment} />
+                {comments.map((comment, index) => {
+                    return <Comment
+                        onDeleteComment={deleteComment}
+                        key={comment}
+                        content={comment} />
                 })}
             </div>
         </article>
